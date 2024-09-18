@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref } from 'vue'
 
-const arraySorts = ref([]);
-const selected = ref('start');
+const inputString = ref<string>('');
+const selected = ref<string>('start');
+let sorted = ref<string>('');
+let arraySorts: string[] = [];
 
 const options = ref([
   { text: 'Выберите один из вариантов', value: 'start' },
@@ -14,6 +16,21 @@ const options = ref([
 
 function sortStart() {
 
+  arraySorts = inputString.value.split(' ');
+
+  if (selected.value == 'bubbleSort') {
+    const bubbleSort = (arraySorts: string[]) => {
+      for (let i = 0; i < arraySorts.length; i++) {
+        for (let j = 0; j < arraySorts.length - i; j++) {
+          if (arraySorts[j] > arraySorts[j + 1]) {
+            [arraySorts[j], arraySorts[j + 1]] = [arraySorts[j + 1], arraySorts[j]];
+          }
+        }
+      }
+    }
+    bubbleSort(arraySorts);
+    sorted.value = arraySorts.join(', ');
+  }
 }
 </script>
 
@@ -26,8 +43,8 @@ function sortStart() {
         <form class="card-body" novalidate>
           <div class="row row__margin">
             <label for="inputControl01" class="card-text card-text__margin">Введите данные
-              через запятую:</label>
-            <input id="inputControl01" class="form-control form-control__margin" v-model="arraySorts">
+              через пробел:</label>
+            <input id="inputControl01" class="form-control form-control__margin" v-model="inputString">
           </div>
           <div class="row row__margin">
             <select v-model="selected" class="form-select form-select__margin" aria-label="Выбор алгоритма сортировки">
@@ -37,15 +54,13 @@ function sortStart() {
             </select>
           </div>
           <div class="row row__margin">
-            <button type="button" class="btn btn-primary btn-primary"
-            :click="sortStart"
-            >
-            Отсортировать
-          </button>
+            <button type="button" class="btn btn-primary btn-primary" @click="sortStart">
+              Отсортировать
+            </button>
           </div>
           <div class="row row__margin">
             <label for="inputControl02" class="card-text card-text__margin">Результат:</label>
-            <input id="inputControl02" class="form-control form-control__margin" :value="arraySorts" readonly >
+            <input id="inputControl02" class="form-control form-control__margin" :value="sorted" readonly>
           </div>
         </form>
       </div>
@@ -66,5 +81,4 @@ function sortStart() {
 .card-text__margin {
   margin-bottom: 10px;
 }
-
 </style>

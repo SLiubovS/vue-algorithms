@@ -18,26 +18,11 @@ const options = ref([
 function sortStart() {
 
   arraySorts = inputString.value.split(' ').map(str => parseFloat(str));
-
   const sortAlgorithm = SortAlgorithmFactory.getAlgorithm(selected.value);
-
   sortAlgorithm.sort(arraySorts);
-
-  // if (selected.value == 'bubbleSort') {
-  //   const bubbleSort = (arraySorts: string[]) => {
-  //     for (let i = 0; i < arraySorts.length; i++) {
-  //       for (let j = 0; j < arraySorts.length - i; j++) {
-  //         if (arraySorts[j] > arraySorts[j + 1]) {
-  //           [arraySorts[j], arraySorts[j + 1]] = [arraySorts[j + 1], arraySorts[j]];
-  //         }
-  //       }
-  //     }
-  //   }
-  //   bubbleSort(arraySorts);
-
-
-    sorted.value = arraySorts.join(', ');
+  sorted.value = arraySorts.join(', ');
 }
+
 </script>
 
 <template>
@@ -60,7 +45,7 @@ function sortStart() {
             </select>
           </div>
           <div class="row row__margin">
-            <button type="button" class="btn btn-primary btn-primary" @click="sortStart">
+            <button type="button" class="btn btn-primary" :disabled="(selected == 'start') ? true : false " @click="sortStart">
               Отсортировать
             </button>
           </div>

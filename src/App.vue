@@ -12,7 +12,7 @@ const options = ref([
   { text: 'Сортировка пузырьком', value: 'bubbleSort' },
   { text: 'Сортировка выбором', value: 'selectedSort' },
   { text: 'Циклическая сортировка', value: 'cycleSort' },
-  { text: 'Быстрая  сортировка', value: 'quickSort ' }
+  { text: 'Быстрая  сортировка', value: 'quickSort' }
 ])
 
 function sortStart() {

@@ -19,7 +19,7 @@ function sortStart() {
 
   arraySorts = inputString.value.split(' ').map(str => parseFloat(str));
   const sortAlgorithm = SortAlgorithmFactory.getAlgorithm(selected.value);
-  sortAlgorithm.sort(arraySorts);
+   sortAlgorithm.sort(arraySorts);
   sorted.value = arraySorts.join(', ');
 }
 

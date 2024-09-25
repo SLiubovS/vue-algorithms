@@ -32,7 +32,7 @@ function sortStart() {
         <div class="row justify-content-center container__margin">
             <div class="col-md-auto col-sm-auto col-auto">
 
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 25rem;">
                     <div class="card-header">
                         Алгоритмы сортировки
                     </div>

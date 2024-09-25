@@ -8,14 +8,14 @@ export class QuickSort implements ISortAlgorithm {
 
 
   private partition(array: number[], start: number, end: number): number {
-    let temp;
+    let temp: number;
     let marker = start;
     for ( let i = start; i < end; i++ ) {
         if ( array[i] < array[end] ) {
             temp = array[marker]; 
             array[marker] = array[i];
             array[i] = temp;
-            marker += 1;
+            marker++;
         }
     }
 

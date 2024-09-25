@@ -8,7 +8,21 @@ export class QuickSort implements ISortAlgorithm {
 
 
   private partition(array: number[], start: number, end: number): number {
-// TO DO https://ru.wikibooks.org/wiki/%D0%A0%D0%B5%D0%B0%D0%BB%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D0%B8_%D0%B0%D0%BB%D0%B3%D0%BE%D1%80%D0%B8%D1%82%D0%BC%D0%BE%D0%B2/%D0%A1%D0%BE%D1%80%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B0/%D0%91%D1%8B%D1%81%D1%82%D1%80%D0%B0%D1%8F#C#_2
+    let temp;
+    let marker = start;
+    for ( let i = start; i < end; i++ ) {
+        if ( array[i] < array[end] ) {
+            temp = array[marker]; 
+            array[marker] = array[i];
+            array[i] = temp;
+            marker += 1;
+        }
+    }
+
+    temp = array[marker];
+    array[marker] = array[end];
+    array[end] = temp; 
+    return marker;  
   }
 
   private quicksort(array: number[], start: number, end: number): void {

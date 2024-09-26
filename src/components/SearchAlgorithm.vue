@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { SearchAlgorithmFactory } from '../models/Search/SearchAlgorithmFactory'
+import { SortAlgorithmFactory } from '../models/Sorting/SortAlgorithmFactory'
+import { BubbleSort } from '../models/Sorting/BubbleSort';
+import { BinarySearch } from '@/models/Search/BinarySearch';
 
 const inputString = ref<string>('');
 const selected = ref<string>('start');
@@ -8,9 +11,13 @@ let searchNumber = ref<number>();
 let result = ref<string>('');
 let arraySearchs: number[] = [];
 
+const toggle = ref<boolean>(false);
+
 const options = ref([
     { text: 'Выберите один из вариантов', value: 'start' },
-    { text: 'Линейный поиск', value: 'linearSearch' }
+    { text: 'Линейный поиск', value: 'linearSearch' },
+    { text: 'Бинарный поиск', value: 'binarySearch' }
+    
 ])
 
 function searchStart() {
@@ -24,6 +31,23 @@ if(searchNumber.value == null) {
 
 let answer = searchAlgorithm.search(arraySearchs, searchNumber.value) as number;
 
+
+
+if (selected.value == 'binarySearch') {
+    
+    let arr = inputString.value.split(' ').map(str => parseFloat(str));
+    
+    sort(arr);
+
+    if (arr != arraySearchs) {
+        inputString.value = arr.join( );
+        toggle.value = true;
+    }
+    else {
+        toggle.value = false;
+    }
+}
+
 if (answer != -1) {
     result.value = `Индекс искомого значения равен: ${answer}`;
 }
@@ -31,6 +55,17 @@ else {
     result.value = 'Индекс не найден';
 }
 }
+
+
+function sort(array: number[]): void {
+        for (let i = 0; i < array.length; i++) {
+            for (let j = 0; j < array.length - i; j++) {
+              if (array[j] > array[j + 1]) {
+                [array[j], array[j + 1]] = [array[j + 1], array[j]];
+              }
+            }
+          }
+    }
 </script>
 
 <template>
@@ -48,7 +83,20 @@ else {
                             <div class="col-auto col__sizing">
                                 <label for="inputControl01" class="card-text w-70 card-text__margin">Введите данные
                                 через пробел:</label>
-                            <input id="inputControl01" class="form-control" v-model="inputString">
+                            <input id="inputControl01" class="form-control" v-model="inputString"
+                            :class=" [ {'is-invalid': toggle == true && selected == 'binarySearch' } ]"
+                            >
+                            <div id="validationServerUsernameFeedback" class="invalid-feedback invalid__size">
+                                <div class="invalid__width">
+        Пожалуйста, введите отсортированный массив для применения бинарного поиска.
+      </div>
+
+      <div v-if="toggle" class="row row__position-w">
+        <button type="button" class="btn btn-info button__width">Отсортировать?</button>
+      </div>
+                            </div>
+      
+      
                         </div>
                             <div class="col padding">
                                 <label for="inputControl02" class="card-text w-30 card-text__margin">Ищем элемент:</label>
@@ -114,5 +162,19 @@ else {
 
 .row__padding {
     padding-left: 1px;
+}
+
+.invalid__size {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.invalid__width {
+    width: 50%;
+}
+
+.is-invalid {
+    box-sizing: border-box;
+    width: 227px;
 }
 </style>

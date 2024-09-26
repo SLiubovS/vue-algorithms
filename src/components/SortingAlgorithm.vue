@@ -37,28 +37,28 @@ function sortStart() {
                         Алгоритмы сортировки
                     </div>
                     <form class="card-body" novalidate>
-                        <div class="row row__margin-bottom">
-                            <label for="inputControl01" class="card-text card-text__margin">Введите данные
+                        <div class="row row__sizing row__padding">
+                            <label for="inputControl01" class="card-text card-text__margin card-text__padding">Введите данные
                                 через пробел:</label>
-                            <input id="inputControl01" class="form-control" v-model="inputString">
+                            <input id="inputControl01" class="form-control input__width" v-model="inputString">
                         </div>
-                        <div class="row row__margin-bottom">
-                            <select v-model="selected" class="form-select form-select__margin"
+                        <div class="row row__sizing">
+                            <select v-model="selected" class="form-select input__width"
                                 aria-label="Выбор алгоритма сортировки">
                                 <option v-for="option in options" :value="option.value">
                                     {{ option.text }}
                                 </option>
                             </select>
                         </div>
-                        <div class="row row__margin-bottom">
-                            <button type="button" class="btn btn-primary"
+                        <div class="row row__sizing">
+                            <button type="button" class="btn btn-primary button__width"
                                 :disabled="(selected == 'start') ? true : false" @click="sortStart">
                                 Отсортировать
                             </button>
                         </div>
-                        <div class="row">
+                        <div class="row row__sizing row__bottom">
                             <label for="inputControl02" class="card-text card-text__margin">Результат:</label>
-                            <input id="inputControl02" class="form-control" :value="sorted" readonly>
+                            <input id="inputControl02" class="form-control input__width" :value="sorted" readonly>
                         </div>
                     </form>
                 </div>
@@ -72,11 +72,32 @@ function sortStart() {
     margin-top: 100px;
 }
 
-.row__margin-bottom {
+.row__sizing {
     margin-bottom: 30px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .card-text__margin {
     margin-bottom: 10px;
+}
+
+.input__width,
+.button__width {
+   margin: auto 10px;
+   width: 100%;
+   margin-left: 13px;
+}
+
+.row__bottom {
+   margin-bottom: 10px; 
+}
+
+.row__padding {
+    padding-left: -1px;
+}
+
+.card-text__padding {
+    padding-left: 13px;
 }
 </style>

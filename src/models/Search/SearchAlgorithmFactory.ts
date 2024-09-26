@@ -1,13 +1,10 @@
-import type { ISearchAlgorithm } from "./ISortAlgorithm";
-import { BubbleSort } from './BubbleSort';
+import type { ISearchAlgorithm } from "./ISearchAlgorithm";
+import { LinearSearch } from './LinearSearch';
 
-
-
-
-export class SortAlgorithmFactory {
-    static getAlgorithm(name: string): ISortAlgorithm {
-        if (name == 'bubbleSort') {
-            return new BubbleSort();
+export class SearchAlgorithmFactory {
+    static getAlgorithm(name: string): ISearchAlgorithm {
+        if (name == 'linearSearch') {
+            return new LinearSearch();
         }
         
         else {

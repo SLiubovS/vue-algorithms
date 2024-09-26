@@ -1,15 +1,36 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { SearchAlgorithmFactory } from '../models/Search/SearchAlgorithmFactory'
 
 const inputString = ref<string>('');
 const selected = ref<string>('start');
-let search = ref<string>('');
+let searchNumber = ref<number>();
+let result = ref<string>('');
 let arraySearchs: number[] = [];
 
 const options = ref([
     { text: 'Выберите один из вариантов', value: 'start' },
     { text: 'Линейный поиск', value: 'linearSearch' }
 ])
+
+function searchStart() {
+
+arraySearchs = inputString.value.split(' ').map(str => parseFloat(str));
+const searchAlgorithm = SearchAlgorithmFactory.getAlgorithm(selected.value);
+
+if(searchNumber.value == null) {
+    throw Error("Число поиска не заполнено");
+}
+
+let answer = searchAlgorithm.search(arraySearchs, searchNumber.value) as number;
+
+if (answer != -1) {
+    result.value = `Индекс искомого значения равен: ${answer}`;
+}
+else {
+    result.value = 'Индекс не найден';
+}
+}
 </script>
 
 <template>
@@ -45,13 +66,13 @@ const options = ref([
                         </div>
                         <div class="row row__position">
                             <button type="button" class="btn btn-primary button__width"
-                                :disabled="(selected == 'start') ? true : false" @click="searchStart">
+                                :disabled="(selected == 'start' || searchNumber == null) ? true : false" @click="searchStart">
                                 Найти
                             </button>
                         </div>
                         <div class="row row__position row__bottom">
                             <label for="inputControl03" class="card-text card-text__margin">Результат:</label>
-                            <input id="inputControl03" class="form-control input__width" :value="search" readonly>
+                            <input id="inputControl03" class="form-control input__width" :value="result" readonly>
                         </div>
                     </form>
                 </div>

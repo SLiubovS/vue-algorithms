@@ -33,8 +33,6 @@ function searchStart() {
 
     let answer = searchAlgorithm.search(arraySearchs, searchNumber.value) as number;
 
-
-
     if (selected.value == 'binarySearch') {
 
         let arr = inputString.value.split(' ').map(str => parseFloat(str));
@@ -42,7 +40,7 @@ function searchStart() {
         sort(arr);
 
         if (arr != arraySearchs) {
-            inputString.value = arr.join();
+            // inputString.value = arr.join();
             toggle.value = true;
         }
         else {
@@ -92,7 +90,7 @@ function sort(array: number[]): void {
                                         <div>Бинарный поиск работает только с отсортированным массивом.</div>
                                     </div>
                                 </div>
-                                <div class="col-4 padding">
+                                <div class="col-4">
                                     <label for="inputControl02"
                                         class="card-text w-55 card-text__margin">Элемент:</label>
                                     <input id="inputControl02" type="number" class="form-control"
@@ -100,9 +98,19 @@ function sort(array: number[]): void {
                                 </div>
                             </div>
 
-                            <div v-if="toggle" class="row row__position">
-                                <div class="col-12">
-                                    <button type="button" class="btn btn-info" style="width: 366px;">Отсортировать?</button>
+                            <div v-if="toggle" class="row row__padding">
+                                <div class="row">
+                                    <h6 class="question__pozition">
+                                        Отсортировать? 
+                                    </h6>
+                                </div>                                
+                                <div class="row row__position">
+                                    <div class="col-6 button__position-left">
+                                        <button type="button" class="btn btn-success button__width">Да</button>
+                                    </div>
+                                    <div class="col-6 button__position-right">
+                                        <button type="button" class="btn btn-danger button__width">Нет</button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row row__position">
@@ -178,5 +186,22 @@ function sort(array: number[]): void {
 .is-invalid {
     box-sizing: border-box;
     width: 227px;
+}
+
+.question__pozition {
+    text-align: center;
+    margin-left: 14px;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+.button__position-left {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.button__position-right {
+    margin-right: 0;
+    padding-right: 0;
 }
 </style>

@@ -64,7 +64,7 @@ function sort(array: number[]): void {
 
 function buttonYesSort(arraySearchs: number[]): void {
     arraySearchs = inputString.value.split(' ').map(str => parseFloat(str));
-    for (let i = 0; i <= arraySearchs.length - 1; i++) {
+    for (let i = 0; i < arraySearchs.length; i++) {
         if (Number.isNaN(arraySearchs[i])) {
             arraySearchs.splice(i, 1);
             i--;
@@ -75,21 +75,6 @@ function buttonYesSort(arraySearchs: number[]): void {
     searchStart();
     toggle.value = false;
 
-}
-
-function buttonNoSort() {
-    const searchAlgorithm = SearchAlgorithmFactory.getAlgorithm(selected.value);
-
-    if (searchNumber.value == null) {
-        throw Error("Число поиска не заполнено");
-    }
-    let answer = searchAlgorithm.search(arraySearchs, searchNumber.value) as number;
-    if (answer != -1) {
-        result.value = `Индекс искомого значения равен: ${answer}`;
-    }
-    else {
-        result.value = 'Индекс не найден';
-    }
 }
 </script>
 

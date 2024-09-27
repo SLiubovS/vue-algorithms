@@ -21,9 +21,6 @@ const options = ref([
 ])
 
 function searchStart() {
-
-    toggle.value = true;
-
     arraySearchs = inputString.value.split(' ').map(str => parseFloat(str));
     const searchAlgorithm = SearchAlgorithmFactory.getAlgorithm(selected.value);
 
@@ -36,11 +33,9 @@ function searchStart() {
     if (selected.value == 'binarySearch') {
 
         let arr = inputString.value.split(' ').map(str => parseFloat(str));
-
         sort(arr);
 
         if (arr != arraySearchs) {
-            // inputString.value = arr.join();
             toggle.value = true;
         }
         else {
@@ -64,6 +59,36 @@ function sort(array: number[]): void {
                 [array[j], array[j + 1]] = [array[j + 1], array[j]];
             }
         }
+    }
+}
+
+function buttonYesSort(arraySearchs: number[]): void {
+    arraySearchs = inputString.value.split(' ').map(str => parseFloat(str));
+    for (let i = 0; i <= arraySearchs.length - 1; i++) {
+        if (Number.isNaN(arraySearchs[i])) {
+            arraySearchs.splice(i, 1);
+            i--;
+        }
+    }
+    sort(arraySearchs);
+    inputString.value = arraySearchs.join(", ");
+    searchStart();
+    toggle.value = false;
+
+}
+
+function buttonNoSort() {
+    const searchAlgorithm = SearchAlgorithmFactory.getAlgorithm(selected.value);
+
+    if (searchNumber.value == null) {
+        throw Error("Число поиска не заполнено");
+    }
+    let answer = searchAlgorithm.search(arraySearchs, searchNumber.value) as number;
+    if (answer != -1) {
+        result.value = `Индекс искомого значения равен: ${answer}`;
+    }
+    else {
+        result.value = 'Индекс не найден';
     }
 }
 </script>
@@ -98,20 +123,9 @@ function sort(array: number[]): void {
                                 </div>
                             </div>
 
-                            <div v-if="toggle" class="row row__padding">
-                                <div class="row">
-                                    <h6 class="question__pozition">
-                                        Отсортировать? 
-                                    </h6>
-                                </div>                                
-                                <div class="row row__position">
-                                    <div class="col-6 button__position-left">
-                                        <button type="button" class="btn btn-success button__width">Да</button>
-                                    </div>
-                                    <div class="col-6 button__position-right">
-                                        <button type="button" class="btn btn-danger button__width">Нет</button>
-                                    </div>
-                                </div>
+                            <div v-if="toggle" class="row row__position">
+                                <button type="button" class="btn btn-info button__width"
+                                    @click="buttonYesSort">Отсортировать?</button>
                             </div>
                             <div class="row row__position">
                                 <select v-model="selected" class="form-select input__width"
@@ -188,20 +202,4 @@ function sort(array: number[]): void {
     width: 227px;
 }
 
-.question__pozition {
-    text-align: center;
-    margin-left: 14px;
-    margin-right: auto;
-    margin-bottom: 10px;
-}
-
-.button__position-left {
-    margin-left: 0;
-    padding-left: 0;
-}
-
-.button__position-right {
-    margin-right: 0;
-    padding-right: 0;
-}
 </style>

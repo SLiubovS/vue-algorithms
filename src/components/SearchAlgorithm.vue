@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { SearchAlgorithmFactory } from '../models/Search/SearchAlgorithmFactory'
-import { SortAlgorithmFactory } from '../models/Sorting/SortAlgorithmFactory'
-import { BubbleSort } from '../models/Sorting/BubbleSort';
-import { BinarySearch } from '@/models/Search/BinarySearch';
 
 const inputString = ref<string>('');
 const selected = ref<string>('start');
@@ -16,12 +13,19 @@ const toggle = ref<boolean>(false);
 const options = ref([
     { text: 'Выберите один из вариантов', value: 'start' },
     { text: 'Линейный поиск', value: 'linearSearch' },
-    { text: 'Бинарный поиск', value: 'binarySearch' }
+    { text: 'Бинарный поиск', value: 'binarySearch' },
+    { text: 'Поиск в глубину', value: 'depthFirstSearch' }
 
 ])
 
 function searchStart() {
     arraySearchs = inputString.value.split(' ').map(str => parseFloat(str));
+    for (let i = 0; i < arraySearchs.length; i++) {
+        if (Number.isNaN(arraySearchs[i])) {
+            arraySearchs.splice(i, 1);
+            i--;
+        }
+    }
     const searchAlgorithm = SearchAlgorithmFactory.getAlgorithm(selected.value);
 
     if (searchNumber.value == null) {

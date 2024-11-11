@@ -13,8 +13,7 @@ const toggle = ref<boolean>(false);
 const options = ref([
     { text: 'Выберите один из вариантов', value: 'start' },
     { text: 'Линейный поиск', value: 'linearSearch' },
-    { text: 'Бинарный поиск', value: 'binarySearch' },
-    { text: 'Поиск в глубину', value: 'depthFirstSearch' }
+    { text: 'Бинарный поиск', value: 'binarySearch' }
 
 ])
 

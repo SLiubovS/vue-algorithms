@@ -29,7 +29,7 @@ function searchStart() {
     const searchAlgorithm = SearchAlgorithmFactory.getAlgorithm(selected.value);
 
     if (searchNumber.value == null) {
-        throw Error("Число поиска не заполнено");
+        throw Error('Число поиска не заполнено');
     }
 
     let answer = searchAlgorithm.search(arraySearchs, searchNumber.value) as number;
@@ -41,6 +41,8 @@ function searchStart() {
 
         if (arr != arraySearchs) {
             toggle.value = true;
+            sort(arraySearchs);
+            inputString.value = arraySearchs.join(' ');
         }
         else {
             toggle.value = false;
@@ -55,7 +57,6 @@ function searchStart() {
     }
 }
 
-
 function sort(array: number[]): void {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array.length - i; j++) {
@@ -65,29 +66,12 @@ function sort(array: number[]): void {
         }
     }
 }
-
-function buttonYesSort(arraySearchs: number[]): void {
-    arraySearchs = inputString.value.split(' ').map(str => parseFloat(str));
-    for (let i = 0; i < arraySearchs.length; i++) {
-        if (Number.isNaN(arraySearchs[i])) {
-            arraySearchs.splice(i, 1);
-            i--;
-        }
-    }
-    sort(arraySearchs);
-    inputString.value = arraySearchs.join(", ");
-    searchStart();
-    toggle.value = false;
-
-}
 </script>
 
 <template>
-
     <div class="container">
         <div class="row justify-content-center container__margin">
             <div class="col-md-auto col-sm-auto col-auto">
-
                 <div class="card" style="width: 25rem;">
                     <div class="card-header">
                         Алгоритмы поиска
@@ -101,7 +85,8 @@ function buttonYesSort(arraySearchs: number[]): void {
                                     <input id="inputControl01" class="form-control" v-model="inputString"
                                         :class="[{ 'is-invalid': toggle == true && selected == 'binarySearch' }]">
                                     <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                                        <div>Бинарный поиск работает только с отсортированным массивом.</div>
+                                        <div>Бинарный поиск работает только с отсортированным массивом. Массив
+                                            отсортирован</div>
                                     </div>
                                 </div>
                                 <div class="col-4">
@@ -110,11 +95,6 @@ function buttonYesSort(arraySearchs: number[]): void {
                                     <input id="inputControl02" type="number" class="form-control"
                                         v-model="searchNumber">
                                 </div>
-                            </div>
-
-                            <div v-if="toggle" class="row row__position">
-                                <button type="button" class="btn btn-info button__width"
-                                    @click="buttonYesSort">Отсортировать?</button>
                             </div>
                             <div class="row row__position">
                                 <select v-model="selected" class="form-select input__width"
@@ -190,5 +170,4 @@ function buttonYesSort(arraySearchs: number[]): void {
     box-sizing: border-box;
     width: 227px;
 }
-
 </style>

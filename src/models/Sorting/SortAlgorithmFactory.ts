@@ -1,8 +1,8 @@
-import type { ISortAlgorithm } from "./ISortAlgorithm";
+import type { ISortAlgorithm } from './ISortAlgorithm';
 import { BubbleSort } from './BubbleSort';
-import { SelectedSort } from "./SelectedSort";
-import { CycleSort } from "./CycleSort";
-import { QuickSort } from "./QuickSort";
+import { SelectedSort } from './SelectedSort';
+import { CycleSort } from './CycleSort';
+import { QuickSort } from './QuickSort';
 
 export class SortAlgorithmFactory {
     static getAlgorithm(name: string): ISortAlgorithm {
@@ -20,6 +20,6 @@ export class SortAlgorithmFactory {
         }
         else {
             throw Error('Алгоритм не найден');
-    }
+        }
     }
 }

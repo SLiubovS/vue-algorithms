@@ -38,7 +38,8 @@ function sortStart() {
                     </div>
                     <form class="card-body" novalidate>
                         <div class="row row__sizing row__padding">
-                            <label for="inputControl01" class="card-text card-text__margin card-text__padding">Введите данные
+                            <label for="inputControl01" class="card-text card-text__margin card-text__padding">Введите
+                                данные
                                 через пробел:</label>
                             <input id="inputControl01" class="form-control input__width" v-model="inputString">
                         </div>
@@ -84,13 +85,13 @@ function sortStart() {
 
 .input__width,
 .button__width {
-   margin: auto 10px;
-   width: 100%;
-   margin-left: 13px;
+    margin: auto 10px;
+    width: 100%;
+    margin-left: 13px;
 }
 
 .row__bottom {
-   margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
 
 .row__padding {

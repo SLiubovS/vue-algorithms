@@ -1,4 +1,4 @@
-import type { ISearchAlgorithm } from "./ISearchAlgorithm";
+import type { ISearchAlgorithm } from './ISearchAlgorithm';
 import { LinearSearch } from './LinearSearch';
 import { BinarySearch } from './BinarySearch';
 import { DepthFirstSearch } from './DepthFirstSearch';
@@ -14,9 +14,8 @@ export class SearchAlgorithmFactory {
         if (name == 'depthFirstSearch') {
             return new DepthFirstSearch();
         }
-        
         else {
             throw Error('Алгоритм не найден');
-    }
+        }
     }
 }

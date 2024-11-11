@@ -1,33 +1,22 @@
-# vue-algorithms
+# Описание проекта:
 
-This template should help get you started developing with Vue 3 in Vite.
+В данном проекте реализованы алгоритмы поиска и алгоритмы сортировки.  
 
-## Recommended IDE Setup
+В данном проекте можно: выбрать вид алгоритма: поиском или сортировкой, ввести массив чисел, в случае поиска - ввести элемент поиска, выбрать способ поиска или сортировки и найти/отсортировать искомый элемент/массив.  
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+2. Запуск проекта:
+2.1. Склонировать репозиторий
 
-## Type Support for `.vue` Imports in TS
+2.2. В склонированной директории выполнить команды в такойже последовательности:  
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
+npm install
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+3. Доступный функционал:
+В проекте 2 компонента, каждый со своим функционалом.
 
-```sh
-npm run build
-```
+3.1. Компонент `SearchAlgorithm.vue` содержит разметку карточки поиска, обязательные к заполнению поля (массив чисел, заполненный через пробел и искомый элемент), а также список с алгоритмами поиска. При заполнении всех обязательных полей и нажатии на кнопку "Найти", в поле результат отображается индекс искомого элемента или "индекс не найден", в случае отсутствия искомого элемента в заданном массиве.   
+
+3.2. Компонент `SortingAlgorithm.vue` содержит разметку карточки сортировки, обязательные к заполнению поля (массив чисел, заполненный через пробел), а также список с алгоритмами сортировки. При заполнении всех обязательных полей и нажатии на кнопку "Отсортировать", в поле результат отображается отсортированный массив.  
